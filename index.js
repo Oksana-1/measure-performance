@@ -19,9 +19,16 @@ const measureSelectors = () => {
 	const lastChild = measure(() => document.querySelector("#wrapper .item:last-child"), 5000);
 	const element = document.querySelector("#summary");
 	element.innerHTML = `
-		<p>First child: ${firstChild} ms</p>
-		<p>Last child: ${lastChild} ms</p>
+		<p>Get first child took: ${firstChild} ms</p>
+		<p>Get last child took: ${lastChild} ms</p>
 `
 }
-addItems(15000);
+addItems(100);
 measureSelectors();
+const runFibonacciOnWorkers = () => {
+	const workerCode = document.querySelector("#workerCode").textContent;
+	const blob = new Blob([workerCode], {type: "text/javascript"});
+	const url = URL.createObjectURL(blob);
+	new Worker(url);
+}
+runFibonacciOnWorkers();

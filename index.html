@@ -7,6 +7,23 @@
 <body>
     <div id="summary"></div>
     <div id="wrapper"></div>
+    <script type="script/worker" id="workerCode">
+        const measure = (fn, limit) => {
+        const before = performance.now();
+        for (let i = 0; i < limit; i++) {
+            fn();
+        }
+            return (performance.now() - before) / limit;
+        }
+        function fibonacci(num) {
+            if (num <= 1) return 1;
+            return fibonacci(num - 1) + fibonacci(num - 2);
+        }
+        setInterval(() => {
+            const fibonacciPerformance = measure(() => fibonacci(40), 1);
+            console.log(fibonacciPerformance);
+        }, 4000)
+    </script>
     <script src="index.js"></script>
 </body>
 </html>
