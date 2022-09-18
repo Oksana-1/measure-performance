@@ -5,8 +5,16 @@
     <title>Title</title>
 </head>
 <body>
-    <div id="summary"></div>
-    <div id="wrapper"></div>
+    <div>
+        <h2>Measuring performance of :first-child, :last-child selectors</h2>
+        <div id="firstLastSelectorSummary"></div>
+        <h2>Measuring performance of fibonacci-fn on web-workers</h2>
+        <div id="fibonacciWebWorkersPerformance">I am calculating right now, but not blocking render...</div>
+    </div>
+    <div>
+        <h2>Render some blocks to make :first-child, :last-child selectors measurement</h2>
+        <div id="firstLastSelectorWrapper"></div>
+    </div>
     <script type="script/worker" id="workerCode">
         const measure = (fn, limit) => {
         const before = performance.now();
@@ -19,10 +27,9 @@
             if (num <= 1) return 1;
             return fibonacci(num - 1) + fibonacci(num - 2);
         }
-        setInterval(() => {
-            const fibonacciPerformance = measure(() => fibonacci(40), 1);
-            console.log(fibonacciPerformance);
-        }, 4000)
+        const fibonacciPerformance = measure(() => fibonacci(40), 10);
+        // Pass value to the main thread
+        postMessage(fibonacciPerformance);
     </script>
     <script src="index.js"></script>
 </body>
