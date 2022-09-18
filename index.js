@@ -48,3 +48,37 @@ const runFibonacciOnWorkers = () => {
 	}
 }
 runFibonacciOnWorkers();
+
+// Measuring performance of Promises vs Observables
+const promiseHandler = () => {
+	const dogPromise = new Promise((resolve) => {
+		setTimeout(() => {
+			resolve("Dog");
+		}, 0);
+	});
+	dogPromise.then((result) => result);
+}
+const observableHandler = () => {
+	const catObservable = new rxjs.Observable((observer) => {
+		setTimeout(() => {
+			observer.next("Cat");
+			observer.complete();
+		}, 0);
+	});
+	catObservable.subscribe({
+		next(result) {
+			return result;
+		},
+	});
+}
+const measurePromisesAndObservables = () => {
+const observableTime = measure(observableHandler, 5000);
+	const promiseTime = measure(promiseHandler, 5000);
+const element = document.querySelector("#promiseObservablePerformance");
+element.innerHTML = `
+	<p>Dog's promise took: ${promiseTime} ms</p>
+	<p>Cat's observable took: ${observableTime} ms</p>
+`
+}
+measurePromisesAndObservables();
+

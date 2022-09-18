@@ -10,6 +10,8 @@
         <div id="firstLastSelectorSummary"></div>
         <h2>Measuring performance of fibonacci-fn on web-workers</h2>
         <div id="fibonacciWebWorkersPerformance">I am calculating right now, but not blocking render...</div>
+        <h2>Measuring performance of Promises and Observables</h2>
+        <div id="promiseObservablePerformance"></div>
     </div>
     <div>
         <h2>Render some blocks to make :first-child, :last-child selectors measurement</h2>
@@ -31,6 +33,7 @@
         // Pass value to the main thread
         postMessage(fibonacciPerformance);
     </script>
+    <script src="https://unpkg.com/rxjs@7.5.6/dist/bundles/rxjs.umd.min.js"></script>
     <script src="index.js"></script>
 </body>
 </html>
